@@ -2,14 +2,16 @@ import json
 from socket import SocketIO
 from flask_socketio import send, emit
 
-from gpio.GPIOPin import GPIOPin
+from gpio.Pin import GPIOPin
 from gpio.utils.create_pins_dict import create_pins_dict
 from gpio.utils.setup_gpio import setup_gpio
 
 global socketio
 
 
-class GPIOController:
+class Controller:
+    ''' Controller object for GPIO pins '''
+
     def __init__(self, socketio: SocketIO) -> None:
 
         # Setup GPIO board

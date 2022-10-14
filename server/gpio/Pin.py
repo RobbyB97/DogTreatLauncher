@@ -6,7 +6,7 @@ class GPIOPin:
         Store data about a GPIO pin
     '''
 
-    def __init__(self, name: str, number: int, type: str):
+    def __init__(self, name: str, number: int, type: str, io: str):
         self.name: str = "".join(name)
         ''' Pin NAME  (Refer to J8 header) '''
         self.type: str = "".join(type)
@@ -20,6 +20,7 @@ class GPIOPin:
         if self.type == "Power":
             self.state = 1
         try:
+
             if not self.type == "Power" and not self.type == "Ground":
                 GPIO.setup(self.number, GPIO.OUT, initial=GPIO.LOW)
         except:
