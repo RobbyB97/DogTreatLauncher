@@ -48,41 +48,41 @@ def test_servo():
     return {}, 200
 
 
-@socketio.on("get-gpio")
-@cross_origin()
-def get_gpio():
-    global gpio_controller
-    print("Get GPIO hit")
-    data = (gpio_controller.jsonify())
+# @socketio.on("get-gpio")
+# @cross_origin()
+# def get_gpio():
+#     global gpio_controller
+#     print("Get GPIO hit")
+#     data = (gpio_controller.jsonify())
 
-    #     send(jsonify(data), json=True)
-    return emit("gpio-update", {"data": jsonify(data)})
-
-
-@socketio.on("gpio-update")
-@cross_origin()
-def gpio_update():
-    print('gpio update')
-    global gpio_controller
-    data = (gpio_controller.jsonify())
-    return emit("gpio-update", data, json=True)
+#     #     send(jsonify(data), json=True)
+#     return emit("gpio-update", {"data": jsonify(data)})
 
 
-@socketio.on("message")
-@cross_origin()
-def message(incData):
-    print("Message received!", incData)
-    global gpio_controller
-    data = (gpio_controller.jsonify())
-    return send(data, json=True)
+# @socketio.on("gpio-update")
+# @cross_origin()
+# def gpio_update():
+#     print('gpio update')
+#     global gpio_controller
+#     data = (gpio_controller.jsonify())
+#     return emit("gpio-update", data, json=True)
 
 
-@socketio.on('toggle-pin')
-@cross_origin()
-def toggle_pin(incData):
-    global gpio_controller
-    gpio_controller.toggle_pin(incData['number'])
-    return 200
+# @socketio.on("message")
+# @cross_origin()
+# def message(incData):
+#     print("Message received!", incData)
+#     global gpio_controller
+#     data = (gpio_controller.jsonify())
+#     return send(data, json=True)
+
+
+# @socketio.on('toggle-pin')
+# @cross_origin()
+# def toggle_pin(incData):
+#     global gpio_controller
+#     gpio_controller.toggle_pin(incData['number'])
+#     return 200
 
 
 if __name__ == "__main__":
