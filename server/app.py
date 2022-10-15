@@ -6,7 +6,7 @@ from dotenv import load_dotenv, dotenv_values
 import sqlite3
 import os
 
-from gpio.GPIOController import GPIOController
+from gpio.Controller import Controller
 
 
 '''
@@ -30,12 +30,22 @@ socketio = SocketIO(app, cors_allowed_origins='*')
 
 # Set up GPIO Controller
 global gpio_controller
-gpio_controller = GPIOController(socketio)
+gpio_controller = Controller(socketio)
 
 
 '''
     Websocket routes
 '''
+
+
+@socketio.on("test-servo")
+@cross_origin()
+def test_servo():
+    global gpio_controller
+    print("Test servo endpoint hit")
+    gpio_controller.test_servo()
+
+    return {}, 200
 
 
 @socketio.on("get-gpio")
