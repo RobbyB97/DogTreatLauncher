@@ -45,7 +45,6 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const disconnect: STypes.SocketContext["disconnect"] = () => {
-    // Get socket
     const _socket = _socketRef.current;
     if (!_socket) return;
 
@@ -53,6 +52,7 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const togglePin: STypes.SocketContext["togglePin"] = (pin: number) => {
+    const _socket = _socketRef.current;
     if (!_socket) return false;
 
     _socket.emit("toggle-pin", { number: pin });
@@ -67,6 +67,14 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   const deactivatePin: STypes.SocketContext["deactivatePin"] = () => {
     // TODO
     return false;
+  };
+
+  const testServo: STypes.SocketContext["testServo"] = () => {
+    const _socket = _socketRef.current;
+    if (!_socket) return false;
+
+    _socket.emit("test-servo");
+    return true;
   };
 
   //////////////////////////////////////////////////////////////////////////////
@@ -146,6 +154,7 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
         togglePin,
         activatePin,
         deactivatePin,
+        testServo,
       }}
     >
       {children}

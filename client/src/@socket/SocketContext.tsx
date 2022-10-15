@@ -12,4 +12,5 @@ export const SocketContext = createContext<STypes.SocketContext>({
   togglePin: (pin: number) => false,
   activatePin: (pin: number) => false,
   deactivatePin: (pin: number) => false,
+  testServo: () => false,
 });

@@ -23,4 +23,7 @@ export type SocketContext = {
 
   /** Deactivate a pin */
   deactivatePin: (pin: number) => boolean;
+
+  /** Test servo */
+  testServo: () => boolean;
 };

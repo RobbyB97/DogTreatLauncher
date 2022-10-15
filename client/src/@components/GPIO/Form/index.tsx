@@ -29,6 +29,10 @@ const Form = ({
     socket.togglePin(selectedPin);
   };
 
+  const testServo = () => {
+    socket.testServo();
+  };
+
   return (
     <div className="GPIOForm">
       {/* Header */}
@@ -83,6 +87,7 @@ const Form = ({
         <div className="GPIOForm__row" style={{ position: "relative" }}>
           <button onClick={(e) => attemptConnection()}>Connect</button>
           <button onClick={(e) => socket.disconnect()}>Disconnect</button>
+          <button onClick={(e) => testServo()}>Test servo</button>
         </div>
       </div>
     </div>
