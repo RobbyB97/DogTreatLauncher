@@ -63,7 +63,7 @@ class ServoPin:
         print("Testing servo")
 
         # Copied from youtube lol
-        self.__pin.start()
+        self.__pin.start(0)
         duty = 2
         while duty <= 12:
             self.__pin.ChangeDutyCycle(duty)
@@ -83,3 +83,4 @@ class ServoPin:
 
         print("Test over")
         self.__pin.stop()
+        return
