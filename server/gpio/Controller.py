@@ -31,32 +31,7 @@ class Controller:
 
     def emit(self):
         ''' Emit changes through websocket '''
-        emit("gpio-update", {"data": self.jsonify()}, broadcast=True)
-        return
-
-    def jsonify(self):
-        ''' Returns self in json format '''
-        pin_data = {}
-        for pin in self.pins:
-            pin_data[self.pins[pin].number] = self.pins[pin].jsonify()
-        return json.dumps(pin_data)
-
-    def toggle_pin(self, pin_number) -> bool:
-        ''' Toggle a pin on the GPIO board '''
-        if (pin_number > 40 or pin_number < 1):
-            print(pin_number, "is outside of GPIO pin array")
-            return False
-
-        self.pins[pin_number].toggle()
-        self.emit()
-        return True
-
-    def reset(self):
-        ''' Reset all GPIO '''
-        for pin in self.pins:
-            self.pins[pin].reset()
-
-        self.emit()
+        # TODO
         return
 
     def test_servo(self):
