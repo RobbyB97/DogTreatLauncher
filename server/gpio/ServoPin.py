@@ -8,22 +8,46 @@ class ServoPin:
     '''
 
     def __init__(self, number: int):
+        # Public attributes
         self.number = number
         ''' GPIO pin header (referring to BOARD layout)'''
 
-        # Set up pin
+        self.should_spin_clockwise: bool = False
+        ''' Flag for whether servo should be spinning clockwise (lowering 
+        degree '''
+
+        self.should_spin_counter_clockwise: bool = False
+        ''' Flag for whether servo should be spinning counter-clockwise 
+        (rising degree '''
+
+        self.activated: bool = False
+        ''' Whether or not the pin is active'''
+
+        # Private attributes
+        self.__pin = self.__create_pin()
+        ''' RPi pin object '''
+        return
+
+    def __create_pin(self):
+        ''' Create GPIO pin '''
         GPIO.setup(self.number, GPIO.OUT)
-        self.pin = GPIO.PWM(self.number, 50)
+        pin = GPIO.PWM(self.number, 50)
+        return pin
+
+    def set_pin_angle(self, angle: float) -> bool:
+        ''' Set pin to specific angle between 0 and 180 '''
+        self.__pin.ChangeDutyCycle(2 + (angle / 18))
+
         return
 
     def start(self):
         ''' Start the pin '''
-        self.pin.start()
+        self.__pin.start()
         return
 
     def stop(self):
         ''' Stop the pin '''
-        self.pin.stop()
+        self.__pin.stop()
         return
 
     def spin_clockwise(self):
@@ -38,23 +62,23 @@ class ServoPin:
         print("Testing servo")
 
         # Copied from youtube lol
-        self.pin.start()
+        self.__pin.start()
         duty = 2
         while duty <= 12:
-            self.pin.ChangeDutyCycle(duty)
+            self.__pin.ChangeDutyCycle(duty)
             sleep(0.5)
             duty += 1
 
         sleep(2)
         print("Now it should start turning the other way")
         sleep(0.3)
-        self.pin.ChangeDutyCycle(7)
+        self.__pin.ChangeDutyCycle(7)
 
         sleep(2)
         print("It should turn again")
-        self.pin.ChangeDutyCycle(2)
+        self.__pin.ChangeDutyCycle(2)
         sleep(0.3)
-        self.pin.ChangeDutyCycle(0)
+        self.__pin.ChangeDutyCycle(0)
 
         print("Test over")
-        self.pin.stop()
+        self.__pin.stop()

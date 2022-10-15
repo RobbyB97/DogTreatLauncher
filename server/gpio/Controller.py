@@ -1,10 +1,12 @@
 import json
 from socket import SocketIO
+from time import sleep
 from flask_socketio import send, emit
+import RPi.GPIO as GPIO
 
-from gpio.Pin import GPIOPin
-from gpio.utils.create_pins_dict import create_pins_dict
+from gpio.ServoPin import ServoPin
 from gpio.utils.setup_gpio import setup_gpio
+
 
 global socketio
 
@@ -14,11 +16,17 @@ class Controller:
 
     def __init__(self, socketio: SocketIO) -> None:
 
-        # Setup GPIO board
-        setup_gpio()
-        pin_data = create_pins_dict()
-        self.pins = pin_data
+        # Setup
+        self.__setup_gpio()
+
         self.socketio = socketio
+        self.servo1 = ServoPin(32)
+        self.servo2 = ServoPin(33)
+        pass
+
+    def __setup_gpio(self):
+        ''' Configure GPIO board '''
+        GPIO.setmode(GPIO.BOARD)
         return
 
     def emit(self):
@@ -50,3 +58,10 @@ class Controller:
 
         self.emit()
         return
+
+    def test_servo(self):
+        self.servo1.test()
+        sleep(5)
+        self.servo2.test()
+        sleep(5)
+        print("Hope it worked")
