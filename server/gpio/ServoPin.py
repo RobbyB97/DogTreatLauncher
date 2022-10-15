@@ -24,7 +24,8 @@ class ServoPin:
         ''' Whether or not the pin is active'''
 
         # Private attributes
-        self.__pin = self.__create_pin()
+        pin = self.__create_pin()
+        self.__pin = pin
         ''' RPi pin object '''
         return
 
@@ -42,7 +43,7 @@ class ServoPin:
 
     def start(self):
         ''' Start the pin '''
-        self.__pin.start()
+        self.__pin.start(0)
         return
 
     def stop(self):
