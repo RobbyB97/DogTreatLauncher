@@ -62,25 +62,34 @@ class ServoPin:
     def test(self):
         print("Testing servo")
 
-        # Copied from youtube lol
         self.__pin.start(0)
-        duty = 2
-        while duty <= 12:
-            self.__pin.ChangeDutyCycle(duty)
-            sleep(0.5)
-            duty += 1
+        self.set_pin_angle(30.4)
+        sleep(1)
+        self.set_pin_angle(30.8)
+        sleep(1)
+        for i in range(30):
+            self.set_pin_angle(i + 30)
+            sleep(0.3)
 
-        sleep(2)
-        print("Now it should start turning the other way")
-        sleep(0.3)
-        self.__pin.ChangeDutyCycle(7)
+        # Copied from youtube lol
+        # self.__pin.start(0)
+        # duty = 2
+        # while duty <= 12:
+        #     self.__pin.ChangeDutyCycle(duty)
+        #     sleep(0.5)
+        #     duty += 1
 
-        sleep(2)
-        print("It should turn again")
-        self.__pin.ChangeDutyCycle(2)
-        sleep(0.3)
-        self.__pin.ChangeDutyCycle(0)
+        # sleep(2)
+        # print("Now it should start turning the other way")
+        # sleep(0.3)
+        # self.__pin.ChangeDutyCycle(7)
 
-        print("Test over")
-        self.__pin.stop()
+        # sleep(2)
+        # print("It should turn again")
+        # self.__pin.ChangeDutyCycle(2)
+        # sleep(0.3)
+        # self.__pin.ChangeDutyCycle(0)
+
+        # print("Test over")
+        # self.__pin.stop()
         return

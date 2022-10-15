@@ -3,8 +3,6 @@ from flask_cors import CORS, cross_origin
 from flask_socketio import SocketIO, send, emit
 from time import sleep
 from dotenv import load_dotenv, dotenv_values
-import sqlite3
-import os
 
 from gpio.Controller import Controller
 
