@@ -1,5 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 
+import "./index.css";
+
 interface DPadProps {
   up: () => void;
   down: () => void;
