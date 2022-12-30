@@ -26,10 +26,12 @@ const DPad = (props: DPadProps) => {
   };
 
   const [size, setSize] = useState(`${getSizeString()}`);
-  const [tileStyle, setTileStyle] = useState<React.CSSProperties>({
+
+  /** CSS properties added to all dpad tiles */
+  const tileStyle: React.CSSProperties = {
     width: `${getSizeString(props.size ? props.size / 3 : DEFAULT_SIZE / 3)}`,
     height: `${getSizeString(props.size ? props.size / 3 : DEFAULT_SIZE / 3)}`,
-  });
+  };
 
   return (
     <div className="dpad" style={{ width: size, height: size }}>
